@@ -1,34 +1,23 @@
 function main() { // função princiapl do jogo que realiza as opreções antes do jogo rodar
 
-    run = !run // mudamos o estado do jogo rodando para o inverso do estado, por exemplo se ele for falso agora ela será verdadeira
-
-    if (run) { // se o jgo tiver rodando
-
-        loop() // chamamos a função de loop
-
-    }
+    setTimeout(loop , 1000 / limiteFPS) // dizemoss que a função loop será chamada a cada 16 milessegundos que da 60 chamas por segundo
 
 }
 
 function loop() { // função que realiza o loop de lógica e renderização
 
-    const now = performance.now(); // ele pega os milissegundos atual
+    fps++ // adiciona mais 1 na contagem de fps
 
-    // enquanto a qauntidade de tempos for maior que 0 E o primeiro tempo registrado seja menor que o milisegundo atual - 1000
-    while (times.length > 0 && times[0] <= now - 1000) { 
-
-        times.shift(); // remove o primeito tempo registrado
+    if (fps > limiteFPS) { // se o fps for maior que limite de FPS
+        
+        fps = limiteFPS - 1 // mudamos o valor de fps para o limite de FPS menos 1
 
     }
-
-    times.push(now); // adiciona um tempo
-
-    fps = times.length; // fps vai ser a quantida de tempos registrados
 
     render() // chamada da função de renderização
     update() // chamada da função de lógica
 
-    window.requestAnimationFrame(loop) // faz requesição do frame autal da tela para função de loop
+    setTimeout(loop , 1000 / limiteFPS) // dizemoss que a função loop será chamada a cada 16 milessegundos que da 60 chamas por segundo
 
 }
 

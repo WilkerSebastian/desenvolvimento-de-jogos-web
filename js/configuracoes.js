@@ -14,11 +14,7 @@ canvas.width = WIDTH // aplicando a largura da janela na largura do canvas
 
 const ctx = canvas.getContext("2d") // dizemos que ctx ira renderizar o canvas em 2D
 
-// variável que ira armazenar se o jogo ta rodando
-
-let run = false // incialmente damos a ela o valor de falso
-
 // preparando as variáveis que armazenam os frames por segundo
 
-const times = [];
+let limiteFPS =  60 // variável que ira determinar o máximo de frames renderizados
 let fps = 0;
