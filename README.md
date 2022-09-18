@@ -1,4 +1,4 @@
-<h1>componentes - loop complexo</h1>
+<h1>componentes - objeto</h1>
 
-Esse componente tem como funçao servir de base
-para qualquer jogo que precise de um simples e que seja de fácil entendimento. 
+Esse componente tem como função exemplificar a criação de
+um objeto genérico num jogo.
