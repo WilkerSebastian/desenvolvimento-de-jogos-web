@@ -1,5 +1,8 @@
+const objetos = [] // lista de objetos no jogo
+
 function main() { // função princiapl do jogo que realiza as opreções antes do jogo rodar
 
+    objetos.push(new Objeto(WIDTH / 2 , HEIGHT / 2 , 50 , 50))
     setTimeout(loop , 1000 / limiteFPS) // dizemoss que a função loop será chamada a cada 16 milessegundos que da 60 chamas por segundo
 
 }
@@ -32,9 +35,11 @@ function render() { // função que ira renderizar o elementos do jogo
     ctx.fillStyle = "white" // dizemos que o proximos elementos terão seu prenchimento pintado de branco
     ctx.fillRect(0 , 0 , WIDTH  , HEIGHT) // desenhamos um quadrado que cobre toda a tela, fillRect(x , y , largura , altura)
 
-    ctx.fillStyle = "black" // dizemos que o proximos elementos terão seu prenchimento pintado de preto
-    ctx.font = "30px ARIAL" // dizemos que a fonte será ARIAL e de 30px de tamanho
-    ctx.fillText("FPS: " + fps, WIDTH / 2 , HEIGHT / 2) // dizemos que queremos um texto e que ele ficara no centro da tela, fillText(texto , x , y)
+    objetos.forEach((obj) => { // usamos o forEach para pecorrer a lista de objetos
+
+        obj.render("red") // para cada objeto na lista renderizamos ele
+
+    })
 
 }
 
