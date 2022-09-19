@@ -1,4 +1,4 @@
-<h1>componentes - objeto</h1>
+<h1>componentes - movimento unico</h1>
 
-Esse componente tem como função exemplificar a criação de
-um objeto genérico num jogo.
+Esse componente tem como função demonstrar como é possível
+movimentar um objeto com input do teclado.
