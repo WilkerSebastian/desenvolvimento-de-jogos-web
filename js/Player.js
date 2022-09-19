@@ -103,9 +103,9 @@ class Player extends Objeto {
         ctx.font = "25px ARIAL"
 
         // renderizamos um texto que nesse caso será da variável x do player
-        ctx.fillText("x: " + this.x.toFixed(2), this.x, this.y - 50) // toFixed(2) só pra deixar ele mostar 2 casas depois da vírgula
+        ctx.fillText("x: " + this.x.toFixed(2), this.x, this.y - this.height) // toFixed(2) só pra deixar ele mostar 2 casas depois da vírgula
         // renderizamos um texto que nesse caso será da variável y do player
-        ctx.fillText("y: " + this.y.toFixed(2), this.x, this.y - 25) // toFixed(2) só pra deixar ele mostar 2 casas depois da vírgula
+        ctx.fillText("y: " + this.y.toFixed(2), this.x, this.y - (this.height / 2)) // toFixed(2) só pra deixar ele mostar 2 casas depois da vírgula
 
         ctx.fillStyle = cor // definimos que a cor de renderização será a cor que recebemos como parâmetro
         ctx.fillRect(this.x, this.y, this.width, this.height) // vamos renderizar um quadrado com os parâmetros do objeto
