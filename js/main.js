@@ -65,7 +65,7 @@ function render() { // função que ira renderizar o elementos do jogo
     ctx.font = "25px ARIAL"
 
     // renderizamos um texto que nesse caso será da variável debugTecla
-    ctx.fillText("tleca pressionada: " + debugTecla , 50 , 50)
+    ctx.fillText("tecla pressionada: " + debugTecla , 50 , 50)
 
 }
 
