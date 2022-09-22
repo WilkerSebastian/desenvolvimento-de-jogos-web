@@ -11,34 +11,34 @@ let debugTecla = 'nenhuma' // variável que vamos usar só verificar qual tecla 
 // exemplo se você teclar w teremos salvo esse valor na variável evento
 window.addEventListener("keydown", (evento) => {
 
-    if (keys[evento.key]) {
+    if (keys[evento.key]) { // caso o jogador aperte uma tecla ques está definida nesse objeto literal
 
-        keys[evento.key].pressed = true
-        players[0].lastKey = keys[evento.key].pressed ? keys[evento.key].tecla : "nenhuma"
+        keys[evento.key].pressed = true // dizemos que a tecla está sendo pressionada
+        players[0].lastKey = evento.key // passamos a tecla pressionada para o player 1
 
     }
 
-    if (arrows[evento.key]) {
+    if (arrows[evento.key]) { // caso o jogador aperte uma tecla ques está definida nesse objeto literal
 
-        arrows[evento.key].pressed = true
-        players[1].lastKey = arrows[evento.key].pressed ? arrows[evento.key].tecla : "nenhuma"
+        arrows[evento.key].pressed = true // dizemos que a tecla está sendo pressionada
+        players[1].lastKey = evento.key // passamos a tecla pressionada para o player 2
 
     }
 
 })
 window.addEventListener("keyup", (evento) => {
 
-    if (keys[evento.key]) {
+    if (keys[evento.key]) { // caso o jogador aperte uma tecla ques está definida nesse objeto literal
 
-        keys[evento.key].pressed = false
-        players[0].lastKey = "nenhuma"
+        keys[evento.key].pressed = false // dizemos que a tecla não está sendo pressionada 
+        players[0].lastKey = "nenhuma" // passamos que a última tecla pressionada será nenhuma
 
     }
 
-    if (arrows[evento.key]) {
+    if (arrows[evento.key]) { // caso o jogador aperte uma tecla ques está definida nesse objeto literal
 
-        arrows[evento.key].pressed = false
-        players[1].lastKey = "nenhuma"
+        arrows[evento.key].pressed = false // dizemos que a tecla não está sendo pressionada
+        players[1].lastKey = "nenhuma" // passamos que a última tecla pressionada será nenhuma
 
     }
 
@@ -71,55 +71,55 @@ function loop() { // função que realiza o loop de lógica e renderização
 
 function update() { // função onde ficara a lógica do jogo
 
-    if (keys.a.pressed && players[0].lastKey == "a") {
+    if (keys.a.pressed && players[0].lastKey == "a") { // caso a tecla pressiona pelo player sejá respectivamente a mesma do objeto literal
 
-        players[0].movimento("esquerda")
-
-    }
-    else if (keys.d.pressed && players[0].lastKey == "d") {
-
-        players[0].movimento("direita")
+        players[0].movimento("esquerda") // movimento de ir para esquerda
 
     }
-    else if (keys.w.pressed && players[0].lastKey == "w") {
+    else if (keys.d.pressed && players[0].lastKey == "d") { // caso a tecla pressiona pelo player sejá respectivamente a mesma do objeto literal
 
-        players[0].movimento("emcima")
-
-    }
-    else if (keys.s.pressed && players[0].lastKey == "s") {
-
-        players[0].movimento("embaixo")
-
-    } else {
-
-        players[0].movimento("nenhuma")
+        players[0].movimento("direita") // movimento de ir para direita
 
     }
+    else if (keys.w.pressed && players[0].lastKey == "w") { // caso a tecla pressiona pelo player sejá respectivamente a mesma do objeto literal
 
-
-
-    if (arrows.ArrowLeft.pressed && players[1].lastKey == "ArrowLeft") {
-
-        players[1].movimento("esquerda")
+        players[0].movimento("emcima") // movimento de subir
 
     }
-    else if (arrows.ArrowRight.pressed && players[1].lastKey == "ArrowRight") {
+    else if (keys.s.pressed && players[0].lastKey == "s") { // caso a tecla pressiona pelo player sejá respectivamente a mesma do objeto literal
 
-        players[1].movimento("direita")
+        players[0].movimento("embaixo") // movimento de descer
+
+    } else { // caso não seja nenhum das condições anteriores
+
+        players[0].movimento("nenhuma") // não será realizado movimento
 
     }
-    else if (arrows.ArrowUp.pressed && players[1].lastKey == "ArrowUp") {
 
-        players[1].movimento("emcima")
+
+
+    if (arrows.ArrowLeft.pressed && players[1].lastKey == "ArrowLeft") { // caso a tecla pressiona pelo player sejá respectivamente a mesma do objeto literal
+
+        players[1].movimento("esquerda") // movimento de ir para esquerda
 
     }
-    else if (arrows.ArrowDown.pressed && players[1].lastKey == "ArrowDown") {
+    else if (arrows.ArrowRight.pressed && players[1].lastKey == "ArrowRight") { // caso a tecla pressiona pelo player sejá respectivamente a mesma do objeto literal
 
-        players[1].movimento("embaixo")
+        players[1].movimento("direita") // movimento de ir para direita
 
-    } else {
+    }
+    else if (arrows.ArrowUp.pressed && players[1].lastKey == "ArrowUp") { // caso a tecla pressiona pelo player sejá respectivamente a mesma do objeto literal
 
-        players[1].movimento("nenhuma")
+        players[1].movimento("emcima") // movimento de subir
+
+    }
+    else if (arrows.ArrowDown.pressed && players[1].lastKey == "ArrowDown") { // caso a tecla pressiona pelo player sejá respectivamente a mesma do objeto literal
+
+        players[1].movimento("embaixo") // movimento de descer
+
+    } else { // caso não seja nenhum das condições anteriores
+
+        players[1].movimento("nenhuma") // não será realizado movimento
 
     }
 
@@ -142,7 +142,7 @@ function render() { // função que ira renderizar o elementos do jogo
     // dizemos que o proximos elementos terão sua fonte sendo 25px do formato ARIAL
     ctx.font = "25px ARIAL"
 
-    // renderizamos um texto que nesse caso será da variável debugTecla
+    // renderizamos um texto que nesse caso será da teclas de movimento dos players
     ctx.fillText("tecla pressionada pelo player 1: " + players[0].lastKey, 50, 50)
     ctx.fillText("tecla pressionada pelo player 2: " + players[1].lastKey, 50, 100)
 

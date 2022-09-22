@@ -17,7 +17,7 @@ class Player extends Objeto {
     constructor(x, y, width, height) {
 
         super(x, y, width, height)
-        this.lastKey = "nenhuma"
+        this.lastKey = "nenhuma" // lastKey será uma variável que armazena teclas passadas para o player
 
     }
 
