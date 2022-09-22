@@ -19,34 +19,48 @@ class Player extends Objeto {
         o super que referencia a superclasse.
 
     */
-    constructor(x, y, width, height , speed) { // speed é um parâmetro que usaremos para definir a velocidade do player
+    constructor(x, y, width, height, speed) { // speed é um parâmetro que usaremos para definir a velocidade do player
 
-        super(x, y, width, height)
+        super(x, y, width, height , true)
         this.speed = speed
 
     }
 
-    update() { // função responsavel pela logica do objeto
+    update(objs) { // função responsavel pela logica do objeto
 
         if (keys.a) { // se A tecla a foi pressionada
-            
+
             this.x -= this.speed // diminuimos a posição x do player conforme o valor de speed
 
         }
         if (keys.d) { // se D tecla a foi pressionada
-            
+
             this.x += this.speed // aumentamos a posição x do player conforme o valor de speed
 
         }
         if (keys.w) { // se W tecla a foi pressionada
 
             this.y -= this.speed // diminuimos a posição y do player conforme o valor de speed
-            
+
         }
         if (keys.s) { // se S tecla a foi pressionada
 
             this.y += this.speed // aumentamos a posição y do player conforme o valor de speed
-            
+
+        }
+
+        for (let index = 0; index < objs.length; index++) {
+
+            const colisor = this.isCollided(objs[index])
+
+            if (colisor.collided) {
+
+                this.x = colisor.x
+                this.y = colisor.y
+                break;
+
+            }
+
         }
 
     }
