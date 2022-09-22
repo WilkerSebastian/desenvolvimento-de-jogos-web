@@ -16,59 +16,59 @@ class Player extends Objeto {
 
     }
 
-    update(arrow) { // função responsavel pela logica do objeto
+    update(arrow) { // função responsavel pela logica do objeto, e no caso arrow será um parâmetro booleano que definira se o movimento do personagem será pelas setinhas ou não
 
-        if (arrow) {
+        if (arrow) { // se arrow for true
 
             if (arrows.ArrowLeft) { // se A tecla a foi pressionada
             
                 this.x -= this.speed // diminuimos a posição x do player conforme o valor de speeddebugTecla = keys[evento.key] ? evento.key : "nenhuma" // evento.key é valor pressionado no teclado em forma de string e o salvaremos no debug caso a tecla pressionada esteja presente no objeto literal keys
-                debugArrow = "ArrowLeft"
+                debugArrow = "ArrowLeft" // definimos que a arrow de debug será referente a setinha que movimentou o player 
     
             }
             if (arrows.ArrowRight) { // se D tecla a foi pressionada
                 
                 this.x += this.speed // aumentamos a posição x do player conforme o valor de speed
-                debugArrow = "ArrowRight"
+                debugArrow = "ArrowRight" // definimos que a arrow de debug será referente a setinha que movimentou o player
     
             }
             if (arrows.ArrowUp) { // se W tecla a foi pressionada
     
                 this.y -= this.speed // diminuimos a posição y do player conforme o valor de speed
-                debugArrow = "ArrowUp"
+                debugArrow = "ArrowUp" // definimos que a arrow de debug será referente a setinha que movimentou o player
 
             }
             if (arrows.ArrowDown) { // se S tecla a foi pressionada
     
                 this.y += this.speed // aumentamos a posição y do player conforme o valor de speed
-                debugArrow = "ArrowDown"
+                debugArrow = "ArrowDown" // definimos que a arrow de debug será referente a setinha que movimentou o player
 
             }
             
-        } else {
+        } else { // se não
             
             if (keys.a) { // se A tecla a foi pressionada
             
                 this.x -= this.speed // diminuimos a posição x do player conforme o valor de speed
-                debugTecla = "A"
+                debugTecla = "A" // definimos que a tecla de debug será referente a tecla que movimentou o player
     
             }
             if (keys.d) { // se D tecla a foi pressionada
                 
                 this.x += this.speed // aumentamos a posição x do player conforme o valor de speed
-                debugTecla = "D"
+                debugTecla = "D" // definimos que a tecla de debug será referente a tecla que movimentou o player
     
             }
             if (keys.w) { // se W tecla a foi pressionada
     
                 this.y -= this.speed // diminuimos a posição y do player conforme o valor de speed
-                debugTecla = "W"
+                debugTecla = "W" // definimos que a tecla de debug será referente a tecla que movimentou o player
 
             }
             if (keys.s) { // se S tecla a foi pressionada
     
                 this.y += this.speed // aumentamos a posição y do player conforme o valor de speed
-                debugTecla = "S"
+                debugTecla = "S" // definimos que a tecla de debug será referente a tecla que movimentou o player
 
             }
 

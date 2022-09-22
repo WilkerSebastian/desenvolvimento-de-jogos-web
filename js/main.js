@@ -22,19 +22,19 @@ window.addEventListener("keydown", (evento) => {
 // exemplo se você soltar a telca w teremos salvo esse valor na variável evento
 window.addEventListener("keyup", (evento) => {
 
-    if (keys[evento.key]) {
+    if (keys[evento.key]) { // se a tecla solta existir no objeto literal
 
-        debugTecla = "nenhuma"
+        debugTecla = "nenhuma" // dizemos que não a tecla sendo pressionada no debug
 
-        keys[evento.key] = false // sé a tecla pressionada estiver presente no objeto keys dizemos que seu valor será falso
+        keys[evento.key] = false // sé a tecla solta estiver presente no objeto keys dizemos que seu valor será falso
 
     }
 
-    if (arrows[evento.key]) {
+    if (arrows[evento.key]) { // se a tecla solta existir no objeto literal
 
-        debugArrow = "nenhuma"
+        debugArrow = "nenhuma" // dizemos que não a tecla sendo pressionada no debug
 
-        arrows[evento.key] = false
+        arrows[evento.key] = false // sé a tecla solta estiver presente no objeto arrows dizemos que seu valor será falso
 
     }
 
@@ -100,6 +100,8 @@ function render() { // função que ira renderizar o elementos do jogo
 
     // renderizamos um texto que nesse caso será da variável debugTecla
     ctx.fillText("tecla pressionada pelo player 1: " + debugTecla, 50, 50)
+
+    // renderizamos um texto que nesse caso será da variável debugArrow
     ctx.fillText("tecla pressionada pelo player 2: " + debugArrow, 50, 100)
 
 }
