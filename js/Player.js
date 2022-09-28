@@ -1,87 +1,56 @@
 /*
+
     Herança é um princípio de orientação a objetos, que permite que classes compartilhem 
     atributos e métodos, através de heranças. Ela é usada na intenção de reaproveitar 
     código ou comportamento generalizado ou especializar operações ou atributos.
+
     nesse caso Player herda do Objeto
+
 */
 class Player extends Objeto {
 
     /*
+<<<<<<< HEAD
+=======
+
+>>>>>>> componentes---movimento-unico
         Quando trabalhamos com herança a superclasse é a classe que herdamos e sub classe é a
         classe que herda da superclasse.
         A subclasse pode sobrescrever métodos da superclasse e, claro, implementar
         seus próprios métodos. 
         Cada classe possui duas referências: o this, que referencia a instância dela mesma e
         o super que referencia a superclasse.
+
     */
-    constructor(x, y, width, height) {
+    constructor(x, y, width, height , speed) { // speed é um parâmetro que usaremos para definir a velocidade do player
 
         super(x, y, width, height)
-        this.lastKey = "nenhuma" // lastKey será uma variável que armazena teclas passadas para o player
+        this.speed = speed
 
     }
 
-    movimento(evento) { // função responsável por mover o player, recebendo como parâmetro uma tecla 
+    update() { // função responsavel pela logica do objeto
 
-        /* 
-        
-            move é um objeto literal que armazena as teclas que se presionadas
-            írão mover o player no eixo x ou y 
-        
-        */
-        const move = {
-
-            x: { // movimento do exio x
-
-                "esquerda": this.x - 5, // "a" será a posição x do player menos 5
-                "direita": this.x + 5 // "d" será a posição x do player mais 5
-
-            },
-            y: { // movimento do eixo y
-
-                "emcima": this.y - 5, // "w" será a posição y do player menos 5
-                "embaixo": this.y + 5 // "s" será a posição y do player mais 5
-
-            }
+        if (keys.a) { // se A tecla a foi pressionada
+            
+            this.x -= this.speed // diminuimos a posição x do player conforme o valor de speed
 
         }
-
-        /* 
-        
-            dizemos que a posição x do player, caso ele tenha teclado uma telca que está 
-            nas teclas do eixo x do objeto literal move, caso não será a posição atual
-        
-        */
-        this.x = move.x[evento] ?? this.x
-
-        /* 
-        
-            dizemos que a posição y do player, caso ele tenha teclado uma telca que está 
-            nas teclas do eixo y do objeto literal move, caso não será a posição atual
-        
-        */
-        this.y = move.y[evento] ?? this.y
-
-        /* EXEMPLO
-            player tem:
-            x = 5
-            y = 20
-        
-            se movimento receber como paramêtro "d"
-            player terá:
-            x = 5 + 5
-            y = 20
-            se movimento receber como paramêtro "w"
-            player terá:
-            x = 5
-            y = 20 - 5
-            se movimento receber como paramêtro "g"
+        if (keys.d) { // se D tecla a foi pressionada
             
-            player terá:
-            x = 5
-            y = 20
-        
-        */
+            this.x += this.speed // aumentamos a posição x do player conforme o valor de speed
+
+        }
+        if (keys.w) { // se W tecla a foi pressionada
+
+            this.y -= this.speed // diminuimos a posição y do player conforme o valor de speed
+            
+        }
+        if (keys.s) { // se S tecla a foi pressionada
+
+            this.y += this.speed // aumentamos a posição y do player conforme o valor de speed
+            
+        }
 
     }
 
