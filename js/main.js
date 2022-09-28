@@ -1,26 +1,33 @@
 /* LISTA DE ELEMENTOS DO JOGO */
 
 const objetos = [] // lista de objetos no jogo
-const players = [] // lista de players no jogo
+
+let player1 // será a variável que armazenaremos o player
 
 /* EVENTOS */
 
 let debugTecla = 'nenhuma' // variável que vamos usar só verificar qual tecla será pressionada
 
-// window.addEventListener "keydown" é um evento de que captura tecla na janela
+// window.addEventListener "keydown" é um evento de que captura tecla pressionada na janela
 // exemplo se você teclar w teremos salvo esse valor na variável evento
 window.addEventListener("keydown" , (evento) => { 
 
-    debugTecla = evento.key // evento.key é valor pressionado no teclado em forma e string 
-
-    // usamos o forEach para pecorrer a lista de players e passamos o evento para o movimento do player
-    players.forEach((player) => player.movimento(evento.key))
+    debugTecla = evento.key // evento.key é valor pressionado no teclado em forma de string 
+    keys[evento.key] = true // sé a tecla pressionada estiver presente no objeto keys dizemos que seu valor será verdadeira
 
 }) 
+// window.addEventListener "keyup" é um evento de que captura tecla solta na janela
+// exemplo se você soltar a telca w teremos salvo esse valor na variável evento
+window.addEventListener("keyup" , (evento) => {
+
+    debugTecla = "nenhuma" // evento.key é valor pressionado no teclado em forma de string 
+    keys[evento.key] = false // sé a tecla pressionada estiver presente no objeto keys dizemos que seu valor será falso
+
+})
 
 function main() { // função princiapl do jogo que realiza as opreções antes do jogo rodar
 
-    players.push(new Player(WIDTH / 2 , HEIGHT / 2 , 50 , 50)) // criamos um novo Player e passamos ele para lista de players
+    player1 = new Player(WIDTH / 2 , HEIGHT / 2 , 50 , 50 , 8) // criamos um novo Player e passamos ele para lista de players
     setTimeout(loop , 1000 / limiteFPS) // dizemoss que a função loop será chamada a cada 16 milessegundos que da 60 chamas por segundo
 
 }
@@ -44,6 +51,7 @@ function loop() { // função que realiza o loop de lógica e renderização
 
 function update() { // função onde ficara a lógica do jogo
     
+    player1.update() // chamamos o update do player
 
 }
 
@@ -52,11 +60,7 @@ function render() { // função que ira renderizar o elementos do jogo
     ctx.fillStyle = "white" // dizemos que o proximos elementos terão seu prenchimento pintado de branco
     ctx.fillRect(0 , 0 , WIDTH  , HEIGHT) // desenhamos um quadrado que cobre toda a tela, fillRect(x , y , largura , altura)
 
-    players.forEach((player) => { // usamos o forEach para pecorrer a lista de players
-
-        player.render("red") // para cada objeto na lista renderizamos ele
-
-    })
+    player1.render("red") // renderizamos o player na cor vermelha
 
     // dizemos que o proximos elementos terão seu prenchimento pintado de preto
     ctx.fillStyle = "black"

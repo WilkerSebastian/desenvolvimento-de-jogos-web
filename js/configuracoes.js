@@ -18,3 +18,13 @@ const ctx = canvas.getContext("2d") // dizemos que ctx ira renderizar o canvas e
 
 let limiteFPS =  60 // variável que ira determinar o máximo de frames renderizados
 let fps = 0;
+
+// objeto literal que aramazena as telcas que seram usadas no jogo
+const keys = {
+ 
+    "a": false, // armazenarar se a tecla A foi pressionada
+    "d": false, // armazenarar se a tecla D foi pressionada
+    "w": false, // armazenarar se a tecla W foi pressionada
+    "s": false // armazenarar se a tecla S foi pressionada
+
+}
