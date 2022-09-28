@@ -9,19 +9,6 @@
 */
 class Player extends Objeto {
 
-    /*
-<<<<<<< HEAD
-=======
-
->>>>>>> componentes---movimento-unico
-        Quando trabalhamos com herança a superclasse é a classe que herdamos e sub classe é a
-        classe que herda da superclasse.
-        A subclasse pode sobrescrever métodos da superclasse e, claro, implementar
-        seus próprios métodos. 
-        Cada classe possui duas referências: o this, que referencia a instância dela mesma e
-        o super que referencia a superclasse.
-
-    */
     constructor(x, y, width, height , speed) { // speed é um parâmetro que usaremos para definir a velocidade do player
 
         super(x, y, width, height)
@@ -29,27 +16,62 @@ class Player extends Objeto {
 
     }
 
-    update() { // função responsavel pela logica do objeto
+    update(arrow) { // função responsavel pela logica do objeto
 
-        if (keys.a) { // se A tecla a foi pressionada
+        if (arrow) {
+
+            if (arrows.ArrowLeft) { // se A tecla a foi pressionada
             
-            this.x -= this.speed // diminuimos a posição x do player conforme o valor de speed
+                this.x -= this.speed // diminuimos a posição x do player conforme o valor de speeddebugTecla = keys[evento.key] ? evento.key : "nenhuma" // evento.key é valor pressionado no teclado em forma de string e o salvaremos no debug caso a tecla pressionada esteja presente no objeto literal keys
+                debugArrow = "ArrowLeft"
+    
+            }
+            if (arrows.ArrowRight) { // se D tecla a foi pressionada
+                
+                this.x += this.speed // aumentamos a posição x do player conforme o valor de speed
+                debugArrow = "ArrowRight"
+    
+            }
+            if (arrows.ArrowUp) { // se W tecla a foi pressionada
+    
+                this.y -= this.speed // diminuimos a posição y do player conforme o valor de speed
+                debugArrow = "ArrowUp"
 
-        }
-        if (keys.d) { // se D tecla a foi pressionada
+            }
+            if (arrows.ArrowDown) { // se S tecla a foi pressionada
+    
+                this.y += this.speed // aumentamos a posição y do player conforme o valor de speed
+                debugArrow = "ArrowDown"
+
+            }
             
-            this.x += this.speed // aumentamos a posição x do player conforme o valor de speed
-
-        }
-        if (keys.w) { // se W tecla a foi pressionada
-
-            this.y -= this.speed // diminuimos a posição y do player conforme o valor de speed
+        } else {
             
-        }
-        if (keys.s) { // se S tecla a foi pressionada
-
-            this.y += this.speed // aumentamos a posição y do player conforme o valor de speed
+            if (keys.a) { // se A tecla a foi pressionada
             
+                this.x -= this.speed // diminuimos a posição x do player conforme o valor de speed
+                debugTecla = "A"
+    
+            }
+            if (keys.d) { // se D tecla a foi pressionada
+                
+                this.x += this.speed // aumentamos a posição x do player conforme o valor de speed
+                debugTecla = "D"
+    
+            }
+            if (keys.w) { // se W tecla a foi pressionada
+    
+                this.y -= this.speed // diminuimos a posição y do player conforme o valor de speed
+                debugTecla = "W"
+
+            }
+            if (keys.s) { // se S tecla a foi pressionada
+    
+                this.y += this.speed // aumentamos a posição y do player conforme o valor de speed
+                debugTecla = "S"
+
+            }
+
         }
 
     }

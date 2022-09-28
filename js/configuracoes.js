@@ -28,3 +28,12 @@ const keys = {
     "s": false // armazenarar se a tecla S foi pressionada
 
 }
+
+const arrows = {
+
+    "ArrowLeft": false,
+    "ArrowRight": false,
+    "ArrowUp": false,
+    "ArrowDown": false
+
+}
