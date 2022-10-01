@@ -29,7 +29,7 @@ function main() { // função princiapl do jogo que realiza as opreções antes 
 
     objetos.push(new Objeto(WIDTH /2 , HEIGHT / 3 , 100 , 50 , true)) // adicionamos um novo objeto com colisão nas lista de objetos
 
-    objetos.push(new Objeto(WIDTH /2 , HEIGHT / 1.5 , 100 , 50 , false))
+    objetos.push(new Objeto(WIDTH /2 , HEIGHT / 1.5 , 100 , 50 , false)) // adicionamos um novo objeto sem colisão na lista de objetos
 
     player1 = new Player(WIDTH / 2 , HEIGHT / 2 , 50 , 50 , 8) // criamos um novo Player e passamos ele para lista de players
     setTimeout(loop , 1000 / limiteFPS) // dizemoss que a função loop será chamada a cada 16 milessegundos que da 60 chamas por segundo
