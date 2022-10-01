@@ -19,14 +19,39 @@ class Player extends Objeto {
         o super que referencia a superclasse.
 
     */
-    constructor(x, y, width, height, speed) { // speed é um parâmetro que usaremos para definir a velocidade do player
+    constructor(x, y, width, height, acceleration) { // speed é um parâmetro que usaremos para definir a velocidade do player
 
-        super(x, y, width, height , true) // player sempre tem colisão
-        this.speed = speed
+        super(x, y, width, height, true) // player sempre tem colisão
+        this.acceleration = acceleration
+        this.speed = 0 // inicialmente a velocidade do player é 0
+        this.direcao = "baixo" // inicialmente a direção do movimento do player é pra baixo
+        this.podePular = true // e incialmente ele pode pular
 
     }
 
     update(objs) { // função responsavel pela logica do objeto
+
+        if (this.y < HEIGHT - objs[0].height && this.direcao == "baixo") { // se o objeto está acma do chão e a direção está para baixo
+
+            this.speed += this.acceleration // somamos a velocidade com a aceleração
+            this.y += this.speed // e aumentamos a posição y do player com a velocide
+ 
+        } else if(this.direcao == "cima") { // se não e a direção for para cima 
+
+            this.speed += this.acceleration / 2.5 // aumentamos a velocidade com a aceleração dvidida em 2.5
+            this.y -= this.speed // e reduzimos a posição y do player com a velocidade
+
+            if (this.y < HEIGHT / 3) { // se a posição do player ja ter ultrapassado 1 terço da tela
+
+                this.direcao = "baixo" // então mudamos a direção
+                
+            }
+
+        } else { // se não for nenhuma caso a posição do player será encostada com o chão
+
+            this.y = HEIGHT - objs[0].height
+
+        }
 
         if (keys.a) { // se A tecla a foi pressionada
 
@@ -38,14 +63,11 @@ class Player extends Objeto {
             this.x += this.speed // aumentamos a posição x do player conforme o valor de speed
 
         }
-        if (keys.w) { // se W tecla a foi pressionada
+        if (keys.space && this.podePular) { // se a tecla space foi pressionada e se o player pode pular
 
-            this.y -= this.speed // diminuimos a posição y do player conforme o valor de speed
-
-        }
-        if (keys.s) { // se S tecla a foi pressionada
-
-            this.y += this.speed // aumentamos a posição y do player conforme o valor de speed
+            this.podePular = false // dizemos que o player não pode mais pular
+            setTimeout(() => this.podePular = true , 500) // dizemos que o player pode pular depois de 500 milessegundos
+            this.direcao = "cima" // e passamos a direção para cima
 
         }
 
@@ -55,6 +77,7 @@ class Player extends Objeto {
 
             if (colisor.collided) { // se a colisão ocorreu
 
+                this.speed = this.acceleration
                 this.x = colisor.x // então a posição x do player será a mesma do colisor
                 this.y = colisor.y // então a posição y do player será a mesma do colisor
                 break; // então paramos o ciclo de repetição caso ocorra a colisão

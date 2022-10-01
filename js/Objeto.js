@@ -234,9 +234,6 @@ class Objeto {
         ctx.fillStyle = cor // definimos que a cor de renderização será a cor que recebemos como parâmetro
         ctx.fillRect(this.x, this.y, this.width, this.height) // vamos renderizar um quadrado com os parâmetros do objeto
 
-        // this.collisional ? "possui colisão" : "não posssui colisão" se o objeto possui colisão mostra esse texto emcima do objeto
-        ctx.fillText(this.collisional ? "possui colisão" : "não posssui colisão", (this.width + this.x) / 1.3, this.y - 25)
-
     }
 
 }

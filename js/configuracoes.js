@@ -24,7 +24,6 @@ const keys = {
  
     "a": false, // armazenarar se a tecla A foi pressionada
     "d": false, // armazenarar se a tecla D foi pressionada
-    "w": false, // armazenarar se a tecla W foi pressionada
-    "s": false // armazenarar se a tecla S foi pressionada
+    "space": false // armazenarar se a tecla space foi pressionada
 
 }

@@ -12,26 +12,28 @@ let debugTecla = 'nenhuma' // variável que vamos usar só verificar qual tecla 
 // exemplo se você teclar w teremos salvo esse valor na variável evento
 window.addEventListener("keydown" , (evento) => { 
 
-    debugTecla = evento.key // evento.key é valor pressionado no teclado em forma de string 
-    keys[evento.key] = true // sé a tecla pressionada estiver presente no objeto keys dizemos que seu valor será verdadeira
+    const key = evento.key != " " ? evento.key : 'space' // como o javascript entende que space como ' ' então caso o vento.key seja ' ' vamos atribuir space como valor
+
+    debugTecla = key // evento.key é valor pressionado no teclado em forma de string 
+    keys[key] = true // sé a tecla pressionada estiver presente no objeto keys dizemos que seu valor será verdadeira
 
 }) 
 // window.addEventListener "keyup" é um evento de que captura tecla solta na janela
 // exemplo se você soltar a telca w teremos salvo esse valor na variável evento
 window.addEventListener("keyup" , (evento) => {
 
+    const key = evento.key != " " ? evento.key : 'space' // como o javascript entende que space como ' ' então caso o vento.key seja ' ' vamos atribuir space como valor
+
     debugTecla = "nenhuma" // evento.key é valor pressionado no teclado em forma de string 
-    keys[evento.key] = false // sé a tecla pressionada estiver presente no objeto keys dizemos que seu valor será falso
+    keys[key] = false // sé a tecla pressionada estiver presente no objeto keys dizemos que seu valor será falso
 
 })
 
 function main() { // função princiapl do jogo que realiza as opreções antes do jogo rodar
 
-    objetos.push(new Objeto(WIDTH /2 , HEIGHT / 3 , 100 , 50 , true)) // adicionamos um novo objeto com colisão nas lista de objetos
+    objetos.push(new Objeto(0 , HEIGHT - 50 , WIDTH , 50 , true)) // adicionamos um objeto que será o nosso chão
 
-    objetos.push(new Objeto(WIDTH /2 , HEIGHT / 1.5 , 100 , 50 , false))
-
-    player1 = new Player(WIDTH / 2 , HEIGHT / 2 , 50 , 50 , 8) // criamos um novo Player e passamos ele para lista de players
+    player1 = new Player(WIDTH / 2 , HEIGHT / 2 , 50 , 50 , 5) // criamos um novo Player e passamos ele para lista de players
     setTimeout(loop , 1000 / limiteFPS) // dizemoss que a função loop será chamada a cada 16 milessegundos que da 60 chamas por segundo
 
 }
@@ -64,8 +66,7 @@ function render() { // função que ira renderizar o elementos do jogo
     ctx.fillStyle = "white" // dizemos que o proximos elementos terão seu prenchimento pintado de branco
     ctx.fillRect(0 , 0 , WIDTH  , HEIGHT) // desenhamos um quadrado que cobre toda a tela, fillRect(x , y , largura , altura)
 
-    objetos[0].render("blue") // o objeto com colisão vamos dar a cor azul
-    objetos[1].render("purple") // o objeto sem colisão vamos dar a cor roxa
+    objetos[0].render("black") // renderizamos o nosso objeto que representa o chão
 
     // dizemos que o proximos elementos terão seu prenchimento pintado de preto
     ctx.fillStyle = "black"
@@ -75,6 +76,10 @@ function render() { // função que ira renderizar o elementos do jogo
 
     // renderizamos um texto que nesse caso será da variável debugTecla
     ctx.fillText("tecla pressionada: " + debugTecla , 50 , 50)
+    // renderizamos um texto que nesse caso será da variável velocidade
+    ctx.fillText("velocidade: " + player1.speed , 50 , 100)
+    // renderizamos um texto que nesse caso será da variável se é possivel pular
+    ctx.fillText(`pode pular: ${player1.podePular ? "sim" : "não"}`, 50 , 150)
 
     player1.render("red") // renderizamos o player na cor vermelha
 
