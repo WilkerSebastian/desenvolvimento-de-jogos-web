@@ -1,4 +1,4 @@
-<h1>componentes - colisão</h1>
+<h1>componentes - gravidade</h1>
 
 Esse componente tem como função demonstrar como é possível
-objetos terem colisão e como isso afeta o player.
+aplicar gravidade no player ou até em objetos.
