@@ -27,7 +27,7 @@ window.addEventListener("keyup" , (evento) => {
 
 function main() { // função princiapl do jogo que realiza as opreções antes do jogo rodar
 
-    objetos.push(new Objeto(WIDTH /2 , HEIGHT / 3 , 100 , 50 , true))
+    objetos.push(new Objeto(WIDTH /2 , HEIGHT / 3 , 100 , 50 , true)) // adicionamos um novo objeto com colisão nas lista de objetos
 
     objetos.push(new Objeto(WIDTH /2 , HEIGHT / 1.5 , 100 , 50 , false))
 
@@ -64,8 +64,8 @@ function render() { // função que ira renderizar o elementos do jogo
     ctx.fillStyle = "white" // dizemos que o proximos elementos terão seu prenchimento pintado de branco
     ctx.fillRect(0 , 0 , WIDTH  , HEIGHT) // desenhamos um quadrado que cobre toda a tela, fillRect(x , y , largura , altura)
 
-    objetos[0].render("blue")
-    objetos[1].render("purple")
+    objetos[0].render("blue") // o objeto com colisão vamos dar a cor azul
+    objetos[1].render("purple") // o objeto sem colisão vamos dar a cor roxa
 
     // dizemos que o proximos elementos terão seu prenchimento pintado de preto
     ctx.fillStyle = "black"

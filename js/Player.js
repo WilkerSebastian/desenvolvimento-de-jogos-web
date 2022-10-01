@@ -21,7 +21,7 @@ class Player extends Objeto {
     */
     constructor(x, y, width, height, speed) { // speed é um parâmetro que usaremos para definir a velocidade do player
 
-        super(x, y, width, height , true)
+        super(x, y, width, height , true) // player sempre tem colisão
         this.speed = speed
 
     }
@@ -49,15 +49,15 @@ class Player extends Objeto {
 
         }
 
-        for (let index = 0; index < objs.length; index++) {
+        for (let index = 0; index < objs.length; index++) { // iremos realizar um ciclo de repetição que pecorra todo os objetos
 
-            const colisor = this.isCollided(objs[index])
+            const colisor = this.isCollided(objs[index]) // iremos receber um colisor levando em comparação do objeto
 
-            if (colisor.collided) {
+            if (colisor.collided) { // se a colisão ocorreu
 
-                this.x = colisor.x
-                this.y = colisor.y
-                break;
+                this.x = colisor.x // então a posição x do player será a mesma do colisor
+                this.y = colisor.y // então a posição y do player será a mesma do colisor
+                break; // então paramos o ciclo de repetição caso ocorra a colisão
 
             }
 
