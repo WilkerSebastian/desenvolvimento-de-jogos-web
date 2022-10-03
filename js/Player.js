@@ -7,7 +7,7 @@
     nesse caso Player herda do Objeto
 
 */
-class Player extends Objeto {
+class Player extends SpriteSheet {
 
     /*
 
@@ -19,9 +19,9 @@ class Player extends Objeto {
         o super que referencia a superclasse.
 
     */
-    constructor(x, y, width, height, speed) { // speed é um parâmetro que usaremos para definir a velocidade do player
+    constructor(x, y, width, height, speed , nome) { // speed é um parâmetro que usaremos para definir a velocidade do player
 
-        super(x, y, width, height , true) // player sempre tem colisão
+        super(x, y, width, height, true , nome) // player sempre tem colisão
         this.speed = speed
 
     }
@@ -31,21 +31,34 @@ class Player extends Objeto {
         if (keys.a) { // se A tecla a foi pressionada
 
             this.x -= this.speed // diminuimos a posição x do player conforme o valor de speed
+            this.animacao = "andar"
+            this.direita = false
+            this.movimentando = true
 
         }
         if (keys.d) { // se D tecla a foi pressionada
 
             this.x += this.speed // aumentamos a posição x do player conforme o valor de speed
+            this.x += this.speed
+            this.animacao = "andar"
+            this.direita = true
+            this.movimentando = true
 
         }
         if (keys.w) { // se W tecla a foi pressionada
 
             this.y -= this.speed // diminuimos a posição y do player conforme o valor de speed
+            this.y -= this.speed
+            this.animacao = "cima"
+            this.movimentando = true
 
         }
         if (keys.s) { // se S tecla a foi pressionada
 
             this.y += this.speed // aumentamos a posição y do player conforme o valor de speed
+            this.y += this.speed
+            this.animacao = "baixo"
+            this.movimentando = true
 
         }
 
@@ -65,7 +78,7 @@ class Player extends Objeto {
 
     }
 
-    render(cor) { // função responsavel 
+    render() { // função responsavel 
 
         // dizemos que o proximos elementos terão seu prenchimento pintado de preto
         ctx.fillStyle = "black"
@@ -78,8 +91,23 @@ class Player extends Objeto {
         // renderizamos um texto que nesse caso será da variável y do player
         ctx.fillText("y: " + this.y.toFixed(2), this.x, this.y - (this.height / 2)) // toFixed(2) só pra deixar ele mostar 2 casas depois da vírgula
 
-        ctx.fillStyle = cor // definimos que a cor de renderização será a cor que recebemos como parâmetro
-        ctx.fillRect(this.x, this.y, this.width, this.height) // vamos renderizar um quadrado com os parâmetros do objeto
+        if (this.animacao == "default" || this.sprites.index >= 2 || !this.movimentando) {
+
+            this.sprites.index = 0
+
+        } else {
+
+            this.sprites.index++
+
+        }
+
+        const sprite = this.sprites[this.nome][this.animacao][this.sprites.index]
+
+        const inversao = this.direita ? -1 : 1
+
+        ctx.scale(inversao , 1)
+
+        ctx.drawImage(img, sprite.x, sprite.y, sprite.width, sprite.height, this.x * inversao, this.y, this.width * inversao, this.height)
 
     }
 

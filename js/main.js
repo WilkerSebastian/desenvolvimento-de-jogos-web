@@ -23,6 +23,8 @@ window.addEventListener("keyup" , (evento) => {
     debugTecla = "nenhuma" // evento.key é valor pressionado no teclado em forma de string 
     keys[evento.key] = false // sé a tecla pressionada estiver presente no objeto keys dizemos que seu valor será falso
 
+    player1.movimentando = false
+
 })
 
 function main() { // função princiapl do jogo que realiza as opreções antes do jogo rodar
@@ -31,7 +33,7 @@ function main() { // função princiapl do jogo que realiza as opreções antes 
 
     objetos.push(new Objeto(WIDTH /2 , HEIGHT / 1.5 , 100 , 50 , false))
 
-    player1 = new Player(WIDTH / 2 , HEIGHT / 2 , 50 , 50 , 8) // criamos um novo Player e passamos ele para lista de players
+    player1 = new Player(WIDTH / 2 , HEIGHT / 2 , 50 , 50 , 8 ,  "firered") // criamos um novo Player e passamos ele para lista de players
     setTimeout(loop , 1000 / limiteFPS) // dizemoss que a função loop será chamada a cada 16 milessegundos que da 60 chamas por segundo
 
 }
@@ -76,7 +78,7 @@ function render() { // função que ira renderizar o elementos do jogo
     // renderizamos um texto que nesse caso será da variável debugTecla
     ctx.fillText("tecla pressionada: " + debugTecla , 50 , 50)
 
-    player1.render("red") // renderizamos o player na cor vermelha
+    player1.render() // renderizamos o player na cor vermelha
 
 }
 

@@ -28,3 +28,6 @@ const keys = {
     "s": false // armazenarar se a tecla S foi pressionada
 
 }
+
+const img = new Image()
+img.src = `./sprites/firered.png`
