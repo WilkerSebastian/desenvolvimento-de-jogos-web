@@ -4,7 +4,7 @@
     atributos e métodos, através de heranças. Ela é usada na intenção de reaproveitar 
     código ou comportamento generalizado ou especializar operações ou atributos.
 
-    nesse caso Player herda do Objeto
+    nesse caso Player herda do SpriteSheet
 
 */
 class Player extends SpriteSheet {
@@ -19,9 +19,9 @@ class Player extends SpriteSheet {
         o super que referencia a superclasse.
 
     */
-    constructor(x, y, width, height, speed , nome) { // speed é um parâmetro que usaremos para definir a velocidade do player
+    constructor(x, y, width, height, speed, nome) { // speed é um parâmetro que usaremos para definir a velocidade do player
 
-        super(x, y, width, height, true , nome) // player sempre tem colisão
+        super(x, y, width, height, true, nome) // player sempre tem colisão e passamos o nome agora para construtor
         this.speed = speed
 
     }
@@ -31,40 +31,37 @@ class Player extends SpriteSheet {
         if (keys.a) { // se A tecla a foi pressionada
 
             this.x -= this.speed // diminuimos a posição x do player conforme o valor de speed
-            this.animacao = "andar"
-            this.direita = false
-            this.movimentando = true
+            this.animacao = "esquerda" // os sprites de animação agora será para esquerda
+            this.movimentando = true // como queremos que o sprite mude dizemos que o movimento está acontecendo
 
         }
         if (keys.d) { // se D tecla a foi pressionada
 
             this.x += this.speed // aumentamos a posição x do player conforme o valor de speed
-            this.x += this.speed
-            this.animacao = "andar"
-            this.direita = true
-            this.movimentando = true
+            this.animacao = "direita" // os sprites de animação agora será para direita
+            this.movimentando = true // como queremos que o sprite mude dizemos que o movimento está acontecendo
 
         }
         if (keys.w) { // se W tecla a foi pressionada
 
             this.y -= this.speed // diminuimos a posição y do player conforme o valor de speed
-            this.y -= this.speed
-            this.animacao = "cima"
-            this.movimentando = true
+            this.animacao = "cima" // os sprites de animação agora será oara cima
+            this.movimentando = true // como queremos que o sprite mude dizemos que o movimento está acontecendo
 
         }
         if (keys.s) { // se S tecla a foi pressionada
 
             this.y += this.speed // aumentamos a posição y do player conforme o valor de speed
-            this.y += this.speed
-            this.animacao = "baixo"
-            this.movimentando = true
+            this.animacao = "baixo" // os sprites de animação agora será para baixo
+            this.movimentando = true // como queremos que o sprite mude dizemos que o movimento está acontecendo
 
         }
 
         for (let index = 0; index < objs.length; index++) { // iremos realizar um ciclo de repetição que pecorra todo os objetos
 
             const colisor = this.isCollided(objs[index]) // iremos receber um colisor levando em comparação do objeto
+
+            colisao = colisor.collided 
 
             if (colisor.collided) { // se a colisão ocorreu
 
@@ -91,23 +88,88 @@ class Player extends SpriteSheet {
         // renderizamos um texto que nesse caso será da variável y do player
         ctx.fillText("y: " + this.y.toFixed(2), this.x, this.y - (this.height / 2)) // toFixed(2) só pra deixar ele mostar 2 casas depois da vírgula
 
+        // vamor mudar a cor de renderização para caso ocorra uma colisão no player se ocorrer a cor será vermelha, se não cinza
+        ctx.fillStyle = colisao ? "red" : "gray"
+
+        // vamor renderizar um quadrado de colisão para ver a colisão ocorrendo no sprite
+        ctx.fillRect(this.x , this.y , this.width , this.height)
+
+        const frameRate =  parseInt(1000 / limiteFPS) / 100  // para calcular a alteração dos sprites vamos pegar o coeficiente dos FPS
+
+        // se animação for a padrão ou valor d eindex seja maior do que limite de linhas que no caso é 2 ou movimentando não esteja acontecendo
         if (this.animacao == "default" || this.sprites.index >= 2 || !this.movimentando) {
 
-            this.sprites.index = 0
+            this.sprites.index = 0  // então o index será 0
 
-        } else {
+        } else { // se não
 
-            this.sprites.index++
+            this.sprites.index += frameRate // somamos o index atual mais o frameRate 
 
         }
 
-        const sprite = this.sprites[this.nome][this.animacao][this.sprites.index]
+        // se o sprite index for um número inteiro então vamo pegar o valor index, se não pegamos o valor depois da virgula 
+        const index = Number.isInteger(this.sprites.index) ? this.sprites.index : parseInt(this.sprites.index.toString())
 
-        const inversao = this.direita ? -1 : 1
+        // pegamos o sprite apartir da da animação e index absoluto
+        const sprite = this.sprites[this.nome][this.animacao][index]
 
-        ctx.scale(inversao , 1)
+        /* 
+        
+            o drawImage é uma função que renderiza imagens e ela possui 3 variações,
+            mas nesse caso será a variação de corte que funciona assim:
 
-        ctx.drawImage(img, sprite.x, sprite.y, sprite.width, sprite.height, this.x * inversao, this.y, this.width * inversao, this.height)
+            drawImage(
+
+                imagem que vai ser manipulada,
+                posição X inicial de corte,
+                posição Y inicial de corte,
+                largura do corte,
+                altura do corte,
+                posição X da imagem renderizada no canvas,
+                posição Y da imagem renderizada no canvas,
+                largura da imagem renderizada no canvas,
+                altura da imagem renderizada no canvas
+
+            )
+
+            EXEMPLO 
+
+            index = 0
+            animacao = "default"
+            movimentando = true
+            nome = "firered"
+
+            Player
+            x = 0
+            y = 0
+            width = 50
+            height = 50
+
+            sprites["firered"]["default"][0] = {
+
+                x: 0,
+                y: 39,
+                width: 14,
+                height: 19
+
+            }
+
+            drawImage(
+
+                firered.png,
+                0,
+                39,
+                14,
+                19,
+                0,
+                0,
+                50,
+                50
+
+            )
+        
+        */
+        ctx.drawImage(imagens[this.nome], sprite.x, sprite.y, sprite.width, sprite.height, this.x, this.y, this.width, this.height)
 
     }
 

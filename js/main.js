@@ -23,7 +23,7 @@ window.addEventListener("keyup" , (evento) => {
     debugTecla = "nenhuma" // evento.key é valor pressionado no teclado em forma de string 
     keys[evento.key] = false // sé a tecla pressionada estiver presente no objeto keys dizemos que seu valor será falso
 
-    player1.movimentando = false
+    player1.movimentando = false // como a tecla foi solta o movimentando é falso
 
 })
 
@@ -31,7 +31,7 @@ function main() { // função princiapl do jogo que realiza as opreções antes 
 
     objetos.push(new Objeto(WIDTH /2 , HEIGHT / 3 , 100 , 50 , true)) // adicionamos um novo objeto com colisão nas lista de objetos
 
-    objetos.push(new Objeto(WIDTH /2 , HEIGHT / 1.5 , 100 , 50 , false))
+    objetos.push(new Objeto(WIDTH /2 , HEIGHT / 1.5 , 100 , 50 , false)) // adicionamos um novo objeto sem colisão nas lista de objetos
 
     player1 = new Player(WIDTH / 2 , HEIGHT / 2 , 50 , 50 , 8 ,  "firered") // criamos um novo Player e passamos ele para lista de players
     setTimeout(loop , 1000 / limiteFPS) // dizemoss que a função loop será chamada a cada 16 milessegundos que da 60 chamas por segundo
@@ -77,6 +77,9 @@ function render() { // função que ira renderizar o elementos do jogo
 
     // renderizamos um texto que nesse caso será da variável debugTecla
     ctx.fillText("tecla pressionada: " + debugTecla , 50 , 50)
+
+    // renderizamos um texto que nesse caso será da variável colisão
+    ctx.fillText(`player colidiu: ${colisao ? "sim" : "não"}`, 50 , 100)
 
     player1.render() // renderizamos o player na cor vermelha
 

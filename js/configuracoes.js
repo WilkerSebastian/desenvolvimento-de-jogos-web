@@ -29,5 +29,22 @@ const keys = {
 
 }
 
-const img = new Image()
-img.src = `./sprites/firered.png`
+// essa função cria uma imagem e retorna ela a partir de um nome passado como parâmetro
+function createImage(nome) {
+
+    const img = new Image() // cria uma nova imagem
+    img.src = `./sprites/${nome}.png` // e dizemos que ela será do arquivo 
+
+    return img // retornamos a imagem
+
+}
+
+// objeto literal que irá armazenar as imagens 
+const imagens = {
+
+    "firered": createImage("firered")
+
+}
+
+// apenas para teste vamos ter uma cor que ira aparecer atras do sprite do personagem para indicar colisão
+let colisao = false
