@@ -1,88 +1,107 @@
-/* LISTA DE ELEMENTOS DO JOGO */
-
-const objetos = [] // lista de objetos no jogo
-
-let player1 // será a variável que armazenaremos o player
-
-/* EVENTOS */
-
-let debugTecla = 'nenhuma' // variável que vamos usar só verificar qual tecla será pressionada
-
-// window.addEventListener "keydown" é um evento de que captura tecla pressionada na janela
-// exemplo se você teclar w teremos salvo esse valor na variável evento
 window.addEventListener("keydown" , (evento) => { 
 
-    debugTecla = evento.key // evento.key é valor pressionado no teclado em forma de string 
-    keys[evento.key] = true // sé a tecla pressionada estiver presente no objeto keys dizemos que seu valor será verdadeira
+    debugTecla = evento.key 
+    keys[evento.key] = true 
 
 }) 
-// window.addEventListener "keyup" é um evento de que captura tecla solta na janela
-// exemplo se você soltar a telca w teremos salvo esse valor na variável evento
+
+let intervalo
+
 window.addEventListener("keyup" , (evento) => {
 
-    debugTecla = "nenhuma" // evento.key é valor pressionado no teclado em forma de string 
-    keys[evento.key] = false // sé a tecla pressionada estiver presente no objeto keys dizemos que seu valor será falso
+    debugTecla = "nenhuma" 
+    keys[evento.key] = false 
 
-    player1.movimentando = false // como a tecla foi solta o movimentando é falso
+    player1.movimentando = false 
+
+})
+window.addEventListener("mousedown" , () => {
+
+    intervalo = setInterval(() => {
+        
+        player1.atirar()
+        ciclando = true
+    
+    } , 1000 / limiteFPS)
+
+
+})
+window.addEventListener("mouseup" , () => {
+
+    clicando = false
+    clearInterval(intervalo)
 
 })
 
-function main() { // função princiapl do jogo que realiza as opreções antes do jogo rodar
+function main() { 
 
-    objetos.push(new Objeto(WIDTH /2 , HEIGHT / 3 , 100 , 50 , true)) // adicionamos um novo objeto com colisão nas lista de objetos
+    fundo = new Fundo(0 , 0 , WIDTH , HEIGHT)
 
-    objetos.push(new Objeto(WIDTH /2 , HEIGHT / 1.5 , 100 , 50 , false)) // adicionamos um novo objeto sem colisão nas lista de objetos
+    player1 = new Player(WIDTH / 2 , HEIGHT / 2 , 100 , 150 , 8 ,  "spitfire" , 100) 
 
-    player1 = new Player(WIDTH / 2 , HEIGHT / 2 , 50 , 50 , 8 ,  "firered") // criamos um novo Player e passamos ele para lista de players
-    setTimeout(loop , 1000 / limiteFPS) // dizemoss que a função loop será chamada a cada 16 milessegundos que da 60 chamas por segundo
+    inimigos.push(new Inimigo(0 , 0 , 100 , 150 , 5 , "bf109" , 25))
+
+    setTimeout(loop , 1000 / limiteFPS) 
 
 }
 
-function loop() { // função que realiza o loop de lógica e renderização
+function loop() { 
 
-    fps++ // adiciona mais 1 na contagem de fps
+    fps++ 
 
-    if (fps > limiteFPS) { // se o fps for maior que limite de FPS
+    if (fps > limiteFPS) { 
         
-        fps = limiteFPS - 1 // mudamos o valor de fps para o limite de FPS menos 1
+        fps = limiteFPS - 1 
 
     }
 
-    render() // chamada da função de renderização
-    update() // chamada da função de lógica
+    render() 
+    update() 
 
-    setTimeout(loop , 1000 / limiteFPS) // dizemoss que a função loop será chamada a cada 16 milessegundos que da 60 chamas por segundo
+    setTimeout(loop , 1000 / limiteFPS) 
 
 }
 
-function update() { // função onde ficara a lógica do jogo
+function update() { 
+
+    if (spanw) {
+        
+        inimigos.push(new Inimigo(Math.random() * WIDTH , 0 , 150 , 150 , 5 , "bf109" , 25))
+        spanw = false
+        setTimeout(() => spanw = true , 10000)
+
+    }
     
-    player1.update(objetos) // chamamos o update do player
+    fundo.update()
+
+    player1.update()
+    player1.tiros.forEach((tiro) => tiro.update())
+
+    inimigos.forEach((inimigo) => {
+        
+        inimigo.update()
+        inimigo.tiros.forEach((tiro) => tiro.update())
+
+
+    
+    })
 
 }
 
-function render() { // função que ira renderizar o elementos do jogo
+function render() { 
 
-    ctx.fillStyle = "white" // dizemos que o proximos elementos terão seu prenchimento pintado de branco
-    ctx.fillRect(0 , 0 , WIDTH  , HEIGHT) // desenhamos um quadrado que cobre toda a tela, fillRect(x , y , largura , altura)
+    fundo.render()
 
-    objetos[0].render("blue") // o objeto com colisão vamos dar a cor azul
-    objetos[1].render("purple") // o objeto sem colisão vamos dar a cor roxa
+    player1.render()
+    player1.tiros.forEach((tiro) => tiro.render())
 
-    // dizemos que o proximos elementos terão seu prenchimento pintado de preto
-    ctx.fillStyle = "black"
-
-    // dizemos que o proximos elementos terão sua fonte sendo 25px do formato ARIAL
-    ctx.font = "25px ARIAL"
-
-    // renderizamos um texto que nesse caso será da variável debugTecla
-    ctx.fillText("tecla pressionada: " + debugTecla , 50 , 50)
-
-    // renderizamos um texto que nesse caso será da variável colisão
-    ctx.fillText(`player colidiu: ${colisao ? "sim" : "não"}`, 50 , 100)
-
-    player1.render() // renderizamos o player na cor vermelha
+    inimigos.forEach((inimigo) => {
+        
+        inimigo.render()
+        inimigo.tiros.forEach((tiro) => tiro.render())
+    
+    })
 
 }
 
-main() // chama a execução da função principal
+main() 

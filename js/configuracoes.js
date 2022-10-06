@@ -1,50 +1,63 @@
-/* arquivo de configuração do jogo */
+const canvas = document.getElementById("canvas")
 
-const canvas = document.getElementById("canvas") // armazenamos o elemento canvas que está no html numa variável
+const HEIGHT = window.innerHeight
+const WIDTH = window.innerWidth
 
-// definindo a largura e altura da tela de renderização 
+canvas.height = HEIGHT
+canvas.width = WIDTH
 
-const HEIGHT = window.innerHeight // pegando a altura da janela da pagina web
-const WIDTH = window.innerWidth // pegando a largura da janela da pagina web
+const ctx = canvas.getContext("2d")
 
-canvas.height = HEIGHT // aplicando a altura da janela na altura do canvas
-canvas.width = WIDTH // aplicando a largura da janela na largura do canvas
-
-// variável que ira ser reponsavel por fonecer os metodos de renderização
-
-const ctx = canvas.getContext("2d") // dizemos que ctx ira renderizar o canvas em 2D
-
-// preparando as variáveis que armazenam os frames por segundo
-
-let limiteFPS =  60 // variável que ira determinar o máximo de frames renderizados
+let limiteFPS = 60
 let fps = 0;
 
-// objeto literal que aramazena as telcas que seram usadas no jogo
 const keys = {
- 
-    "a": false, // armazenarar se a tecla A foi pressionada
-    "d": false, // armazenarar se a tecla D foi pressionada
-    "w": false, // armazenarar se a tecla W foi pressionada
-    "s": false // armazenarar se a tecla S foi pressionada
+
+    "a": false,
+    "d": false,
+    "w": false,
+    "s": false
 
 }
 
-// essa função cria uma imagem e retorna ela a partir de um nome passado como parâmetro
+
 function createImage(nome) {
 
-    const img = new Image() // cria uma nova imagem
-    img.src = `./sprites/${nome}.png` // e dizemos que ela será do arquivo 
+    const img = new Image()
+    img.src = `./sprites/${nome}.png`
 
-    return img // retornamos a imagem
+    return img
 
 }
 
-// objeto literal que irá armazenar as imagens 
 const imagens = {
 
-    "firered": createImage("firered")
+    "oceano": createImage("oceano"),
+    "bf109": createImage("bf109"),
+    "spitfire": createImage("spitfire"),
+    "tiro": createImage("tiro")
 
 }
 
-// apenas para teste vamos ter uma cor que ira aparecer atras do sprite do personagem para indicar colisão
 let colisao = false
+
+function saiuDoMundo(obj) {
+
+    const sumX = obj.x + obj.width
+    const sumY = obj.y + obj.height
+
+    const width = WIDTH - sumX
+    const height = HEIGHT - sumY
+
+    return sumX > width || sumX < -sumX || sumY > height || sumY < -sumY
+
+}
+
+const inimigos = []
+
+let player1 
+let fundo
+
+let clicando = false
+
+let spanw = false
